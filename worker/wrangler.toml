@@ -1,0 +1,13 @@
+name = "jp-assembly-civic-worker"
+main = "src/index.ts"
+compatibility_date = "2026-01-28"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "civic-db"
+database_id = "89d1e24a-2dc5-4b94-8156-0cfc71293217"
+
+[ai]
+binding = "AI"
+remote = true
+

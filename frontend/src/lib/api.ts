@@ -1,0 +1,1 @@
+export const API_BASE = "https://jp-assembly-civic-worker.hito7772000.workers.dev";

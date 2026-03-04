@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Citizen Report Schema (PoC)",
+  "type": "object",
+  "required": ["type", "geometry", "properties"],
+  "properties": {
+    "type": {
+      "const": "Feature"
+    },
+    "geometry": {
+      "type": "object",
+      "required": ["type", "coordinates"],
+      "properties": {
+        "type": { "const": "Point" },
+        "coordinates": {
+          "type": "array",
+          "items": { "type": "number" },
+          "minItems": 2,
+          "maxItems": 2,
+          "description": "[longitude, latitude]"
+        }
+      }
+    },
+    "properties": {
+      "type": "object",
+      "required": [
+        "report_id",
+        "municipality_code",
+        "tags",
+        "description",
+        "source",
+        "created_at"
+      ],
+      "properties": {
+        "report_id": {
+          "type": "string",
+          "description": "Unique report identifier (UUID or r-xxxx format)"
+        },
+        "municipality_code": {
+          "type": "string",
+          "description": "Local government code (全国地方公共団体コード)"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Flexible tag-based classification"
+        },
+        "description": {
+          "type": "object",
+          "required": ["problems", "solutions"],
+          "properties": {
+            "problems": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of citizen-reported problems"
+            },
+            "solutions": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "List of proposed solutions"
+            }
+          }
+        },
+        "source": {
+          "type": "string",
+          "enum": ["citizen"],
+          "description": "Source of the report (PoC: always 'citizen')"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO8601 timestamp"
+        }
+      }
+    }
+  }
+}

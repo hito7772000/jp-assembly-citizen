@@ -1,0 +1,37 @@
+[
+  { "tag_id": "childcare_nursery", "name": "保育園", "level": "medium", "parent_id": "field_childcare" },
+  { "tag_id": "childcare_kodomoen", "name": "認定こども園", "level": "medium", "parent_id": "field_childcare" },
+  { "tag_id": "childcare_after_school", "name": "学童", "level": "medium", "parent_id": "field_childcare" },
+  { "tag_id": "childcare_support", "name": "子育て支援", "level": "medium", "parent_id": "field_childcare" },
+
+  { "tag_id": "edu_school_lunch", "name": "学校給食", "level": "medium", "parent_id": "field_education" },
+  { "tag_id": "edu_special_support", "name": "特別支援教育", "level": "medium", "parent_id": "field_education" },
+  { "tag_id": "edu_ict", "name": "ICT教育", "level": "medium", "parent_id": "field_education" },
+  { "tag_id": "edu_facilities", "name": "学校施設整備", "level": "medium", "parent_id": "field_education" },
+
+  { "tag_id": "welfare_elderly", "name": "高齢者福祉", "level": "medium", "parent_id": "field_welfare" },
+  { "tag_id": "welfare_disability", "name": "障害福祉", "level": "medium", "parent_id": "field_welfare" },
+  { "tag_id": "welfare_medical", "name": "医療体制", "level": "medium", "parent_id": "field_welfare" },
+  { "tag_id": "welfare_child", "name": "子ども家庭支援", "level": "medium", "parent_id": "field_welfare" },
+
+  { "tag_id": "transport_bus", "name": "地域バス交通", "level": "medium", "parent_id": "field_transport" },
+  { "tag_id": "transport_road", "name": "道路整備", "level": "medium", "parent_id": "field_transport" },
+  { "tag_id": "transport_rail", "name": "鉄道・駅", "level": "medium", "parent_id": "field_transport" },
+  { "tag_id": "transport_bicycle", "name": "自転車インフラ", "level": "medium", "parent_id": "field_transport" },
+
+  { "tag_id": "disaster_flood", "name": "水害対策", "level": "medium", "parent_id": "field_disaster" },
+  { "tag_id": "disaster_earthquake", "name": "耐震化", "level": "medium", "parent_id": "field_disaster" },
+  { "tag_id": "disaster_fire", "name": "消防・救急", "level": "medium", "parent_id": "field_disaster" },
+  { "tag_id": "disaster_crime", "name": "防犯", "level": "medium", "parent_id": "field_disaster" },
+
+  { "tag_id": "tax_resident", "name": "住民税", "level": "medium", "parent_id": "field_tax" },
+  { "tag_id": "tax_property", "name": "固定資産税", "level": "medium", "parent_id": "field_tax" },
+  { "tag_id": "tax_corporate", "name": "法人税（市税）", "level": "medium", "parent_id": "field_tax" },
+
+  { "tag_id": "env_recycle", "name": "ごみ・リサイクル", "level": "medium", "parent_id": "field_environment" },
+  { "tag_id": "env_climate", "name": "気候変動対策", "level": "medium", "parent_id": "field_environment" },
+  { "tag_id": "env_nature", "name": "自然保全", "level": "medium", "parent_id": "field_environment" },
+
+  { "tag_id": "community_activities", "name": "地域活動", "level": "medium", "parent_id": "field_community" },
+  { "tag_id": "community_facilities", "name": "地域施設", "level": "medium", "parent_id": "field_community" }
+]
