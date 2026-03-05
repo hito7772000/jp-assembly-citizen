@@ -1,0 +1,40 @@
+name: "Spec Proposal"
+description: "データ構造・API・保存形式などの仕様提案"
+title: "[Spec] "
+labels: ["spec", "discussion"]
+body:
+  - type: input
+    id: purpose
+    attributes:
+      label: "1. Purpose（目的）"
+      placeholder: "例：投稿データの JSON 形式を決める"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "2. Context（背景）"
+      placeholder: "なぜ必要か、どの部分に関係するか（frontend / worker / D1）"
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: "3. Proposal（提案）"
+      placeholder: "- 提案内容\n- 選択肢\n- 判断基準（再現性・公平性・心理的安全性）"
+    validations:
+      required: true
+
+  - type: textarea
+    id: open
+    attributes:
+      label: "4. Open Questions（未決定点）"
+      placeholder: "- 未決定点1\n- 未決定点2"
+
+  - type: textarea
+    id: related
+    attributes:
+      label: "5. Related Specs"
+      placeholder: "- spec/post.json\n- worker/api.md"

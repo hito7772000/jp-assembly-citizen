@@ -1,0 +1,42 @@
+name: "Bug Report"
+description: "不具合報告（UI/UX、Workers API、データ保存など）"
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: "1. Summary（概要）"
+      placeholder: "何が起きたかを 1 行で"
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: "2. Steps to Reproduce（再現手順）"
+      placeholder: "1. ...\n2. ...\n3. ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: "3. Expected Behavior（期待される動作）"
+      placeholder: "本来どう動くべきか"
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: "4. Actual Behavior（実際の動作）"
+      placeholder: "実際にどう動いたか"
+    validations:
+      required: true
+
+  - type: textarea
+    id: env
+    attributes:
+      label: "5. Environment（環境）"
+      placeholder: "OS / Browser / Device / Network など"
