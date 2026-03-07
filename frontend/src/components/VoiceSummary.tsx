@@ -47,6 +47,14 @@ export function VoiceSummary() {
 
             pushAI(data.emotion);
 
+            if (!Array.isArray(data.issues) || data.issues.length === 0 ||
+                !Array.isArray(data.solutions) || data.solutions.length === 0) {
+
+                pushAI("⚠️ 問題点または改善案が抽出できませんでした。投稿できません。");
+                setAwaitConfirm(false);
+                return;
+            }
+
             const summaryCard =
                 `📘 整理した内容\n\n` +
                 `【問題点】\n${data.issues.map((i: string) => "・" + i).join("\n")}\n\n` +
