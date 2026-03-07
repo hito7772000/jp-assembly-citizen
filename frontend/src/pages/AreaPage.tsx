@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useLocationStore } from "../store/location";
 import { useEffect } from "react";
 
-const prefectures = ["東京都"];
+const prefectures = ["山形県", "東京都"];
 
 export default function AreaPage() {
     const setPref = useLocationStore((s) => s.setPref);

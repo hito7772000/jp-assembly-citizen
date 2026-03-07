@@ -3,6 +3,7 @@ import { useLocationStore } from "../store/location";
 import { cityCenters } from "../data/city-centers";
 
 const cities: Record<string, string[]> = {
+    "山形県": ["小国町"],
     "東京都": ["日野市"]
 };
 
