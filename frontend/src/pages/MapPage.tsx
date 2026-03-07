@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import L from "leaflet";
 import { API_BASE } from "../lib/api";
 import { markerIcons } from "../lib/markerIcons";
+import { LegendControl } from "../components/LegendControl";
 
 type Report = {
     id: number;
@@ -183,6 +184,8 @@ export default function MapPage() {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     attribution='&copy; OpenStreetMap contributors'
                 />
+
+                <LegendControl />
 
                 <CityHallMarker />
                 <CenterOnCity />
