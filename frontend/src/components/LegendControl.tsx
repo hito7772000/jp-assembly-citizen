@@ -8,18 +8,17 @@ export function LegendControl() {
     const map = useMap();
 
     useEffect(() => {
-        const legend = L.control({ position: "bottomright" });
+        const legend = new L.Control({ position: "bottomright" });
 
         legend.onAdd = () => {
             const container = L.DomUtil.create("div", "legend-container");
 
-            // PC ならデフォルトで open
             const isPc = window.innerWidth > 600;
             const defaultOpenClass = isPc ? "open" : "";
 
             container.innerHTML = `
         <button class="legend-toggle">ℹ️</button>
-         <div class="legend-panel ${defaultOpenClass}">
+        <div class="legend-panel ${defaultOpenClass}">
           <b>凡例</b><br>
           <div class="legend-item">
             <img src="${markerIcons.violet.options.iconUrl}" />
@@ -43,7 +42,6 @@ export function LegendControl() {
                 panel?.classList.toggle("open");
             });
 
-            // 地図へのクリック伝播を止める
             L.DomEvent.disableClickPropagation(container);
 
             return container;
