@@ -1,15 +1,10 @@
 import { SYSTEM_PROMPT } from "./prompt";
+import { isMeaningless } from "./filter";
 
 export interface Env {
 	DB: D1Database;
 	AI: any;
 }
-
-const corsHeaders = {
-	"Access-Control-Allow-Origin": "*",
-	"Access-Control-Allow-Methods": "GET, POST, OPTIONS",
-	"Access-Control-Allow-Headers": "Content-Type",
-};
 
 function withCors(response: Response): Response {
 	const res = response.clone();
@@ -62,8 +57,18 @@ export default {
 
 async function handleVoiceSummary(request: Request, env: Env): Promise<Response> {
 	const body = await request.json<any>();
+
+	console.log("RAW TEXT:", body.text, typeof body.text);
+
 	const text = requireString(body.text, "text");
 	if (text instanceof Response) return text;
+
+	if (isMeaningless(text)) {
+		return new Response(
+			JSON.stringify({ error: "エラーが発生しました。" }),
+			{ status: 400, headers: { "Content-Type": "application/json" } }
+		);
+	}
 
 	const messages = [
 		{ role: "system", content: SYSTEM_PROMPT },
@@ -76,8 +81,18 @@ async function handleVoiceSummary(request: Request, env: Env): Promise<Response>
 			temperature: 0.0,
 		});
 
+		console.log("=== AI RAW RESPONSE ===");
+		console.log(JSON.stringify(aiResponse, null, 2));
+
 		const raw = aiResponse.response ?? aiResponse;
+
+		console.log("=== RAW TEXT FROM AI ===");
+		console.log(raw);
+
 		const jsonText = raw.slice(raw.indexOf("{"), raw.lastIndexOf("}") + 1);
+
+		console.log("=== EXTRACTED JSON TEXT ===");
+		console.log(jsonText);
 
 		let json;
 		try {
