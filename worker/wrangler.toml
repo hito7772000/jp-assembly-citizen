@@ -2,6 +2,18 @@ name = "jp-assembly-civic-worker"
 main = "src/index.ts"
 compatibility_date = "2026-01-28"
 
+[[durable_objects.bindings]]
+name = "MAP_DO"
+class_name = "MindmapDO"
+
+[[migrations]]
+tag = "v1"
+new_classes = ["Mindmap_do"]
+
+[[migrations]]
+tag = "v2"
+renamed_classes = [{ from = "Mindmap_do", to = "MindmapDO" }]
+
 [[d1_databases]]
 binding = "DB"
 database_name = "civic-db"
@@ -10,4 +22,3 @@ database_id = "89d1e24a-2dc5-4b94-8156-0cfc71293217"
 [ai]
 binding = "AI"
 remote = true
-
