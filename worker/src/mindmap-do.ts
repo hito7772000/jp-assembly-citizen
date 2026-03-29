@@ -94,6 +94,12 @@ export class MindmapDO {
 			return this.badRequest("type is invalid");
 		}
 
+		const solution = this.parseOptionalString(body.solution);
+		if (type === "problem" && !solution) {
+			return this.badRequest("solution is required when type is problem");
+		}
+		const storedContent = this.buildStoredContent(type, content, solution);
+
 		const parentStmt = this.env.DB.prepare(
 			`SELECT id, parent_id, type, content, path, depth
 			 FROM nodes
@@ -131,7 +137,7 @@ export class MindmapDO {
 		const insert = this.env.DB.prepare(
 			`INSERT INTO nodes (id, parent_id, type, content, path, depth)
 			 VALUES (?1, ?2, ?3, ?4, ?5, ?6)`,
-		).bind(nodeId, parent.id, type, content, nextPath, nextDepth);
+		).bind(nodeId, parent.id, type, storedContent, nextPath, nextDepth);
 
 		await insert.run();
 
@@ -141,7 +147,7 @@ export class MindmapDO {
 				id: nodeId,
 				parent_id: parent.id,
 				type,
-				content,
+				content: storedContent,
 				path: nextPath,
 				depth: nextDepth,
 			},
@@ -200,5 +206,18 @@ export class MindmapDO {
 			return this.badRequest(`${name} is required and must be a non-empty string`);
 		}
 		return value.trim();
+	}
+
+	private parseOptionalString(value: unknown): string | null {
+		if (typeof value !== "string") return null;
+		const trimmed = value.trim();
+		return trimmed.length > 0 ? trimmed : null;
+	}
+
+	private buildStoredContent(type: NodeType, content: string, solution: string | null): string {
+		if (type !== "problem") {
+			return content;
+		}
+		return `問題: ${content}\n解決策: ${solution}`;
 	}
 }
