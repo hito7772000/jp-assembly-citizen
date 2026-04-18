@@ -3,7 +3,7 @@ import { jsonError } from "../../shared/http";
 import { createId } from "../../shared/id";
 import { parseDepthRange } from "../../shared/parsers";
 import { requireString } from "../../shared/validation";
-import { countMapNodes, createMapWithRoot, findMap, findNodes } from "./repository";
+import { countMapNodes, createMapWithRoot, findMap, findMaps, findNodes } from "./repository";
 import type { GetNodesQuery } from "./types";
 
 export async function createMapService(env: Env, body: unknown): Promise<Response> {
@@ -24,6 +24,18 @@ export async function getMapInfoService(env: Env, mapId: string): Promise<Respon
 
 	const nodeCount = await countMapNodes(env, mapId);
 	return Response.json({ id: map.id, topic: map.topic, node_count: nodeCount });
+}
+
+export async function listMapsService(env: Env, request: Request): Promise<Response> {
+	const url = new URL(request.url);
+	const limitRaw = url.searchParams.get("limit");
+	const limit = limitRaw == null ? 50 : Number(limitRaw);
+	if (!Number.isFinite(limit) || limit <= 0) {
+		return jsonError("limit must be a positive number");
+	}
+
+	const maps = await findMaps(env, limit);
+	return Response.json(maps);
 }
 
 export async function getNodesService(env: Env, mapId: string, request: Request): Promise<Response> {

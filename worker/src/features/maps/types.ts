@@ -12,6 +12,11 @@ export interface MapInfoRow {
 	topic: string;
 }
 
+export interface MapListRow {
+	id: string;
+	topic: string;
+}
+
 export interface NodeRow {
 	id: string;
 	parent_id: string;

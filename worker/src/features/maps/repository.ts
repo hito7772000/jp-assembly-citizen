@@ -1,5 +1,5 @@
 import type { Env } from "../../shared/env";
-import type { GetNodesQuery, MapInfoRow, NodeRow } from "./types";
+import type { GetNodesQuery, MapInfoRow, MapListRow, NodeRow } from "./types";
 
 export async function createMapWithRoot(env: Env, mapId: string, topic: string): Promise<void> {
 	const rootPath = `${mapId}/${mapId}`;
@@ -16,6 +16,18 @@ export async function createMapWithRoot(env: Env, mapId: string, topic: string):
 export async function findMap(env: Env, mapId: string): Promise<MapInfoRow | null> {
 	const stmt = env.DB.prepare(`SELECT id, topic FROM mindmaps WHERE id = ?1 LIMIT 1`).bind(mapId);
 	return await stmt.first<MapInfoRow>();
+}
+
+export async function findMaps(env: Env, limit: number): Promise<MapListRow[]> {
+	const safeLimit = Math.max(1, Math.min(200, Math.floor(limit)));
+	const stmt = env.DB.prepare(
+		`SELECT id, topic
+		 FROM mindmaps
+		 ORDER BY rowid DESC
+		 LIMIT ${safeLimit}`,
+	);
+	const rows = await stmt.all<MapListRow>();
+	return rows.results ?? [];
 }
 
 export async function countMapNodes(env: Env, mapId: string): Promise<number> {

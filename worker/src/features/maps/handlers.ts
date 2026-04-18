@@ -1,5 +1,5 @@
 import type { Env } from "../../shared/env";
-import { createMapService, getMapInfoService, getNodesService } from "./service";
+import { createMapService, getMapInfoService, getNodesService, listMapsService } from "./service";
 
 export async function createMapHandler(request: Request, env: Env): Promise<Response> {
 	const body = await request.json<unknown>();
@@ -8,6 +8,10 @@ export async function createMapHandler(request: Request, env: Env): Promise<Resp
 
 export async function getMapInfoHandler(mapId: string, env: Env): Promise<Response> {
 	return getMapInfoService(env, mapId);
+}
+
+export async function listMapsHandler(request: Request, env: Env): Promise<Response> {
+	return listMapsService(env, request);
 }
 
 export async function getMapNodesHandler(mapId: string, request: Request, env: Env): Promise<Response> {

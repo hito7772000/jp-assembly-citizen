@@ -3,6 +3,7 @@ import {
 	createMapHandler,
 	getMapInfoHandler,
 	getMapNodesHandler,
+	listMapsHandler,
 	mapWebSocketHandler,
 } from "./features/maps/handlers";
 import { createReportHandler, nearbyReportsHandler } from "./features/reports/handlers";
@@ -36,6 +37,10 @@ export async function routeRequest(request: Request, env: Env): Promise<Response
 
 	if (request.method === "POST" && pathname === "/maps") {
 		return withCors(await createMapHandler(request, env));
+	}
+
+	if (request.method === "GET" && pathname === "/maps") {
+		return withCors(await listMapsHandler(request, env));
 	}
 
 	if (request.method === "GET" && /^\/maps\/[^/]+$/.test(pathname)) {
